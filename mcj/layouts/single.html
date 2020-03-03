@@ -1,0 +1,43 @@
+{{ define "main" }}
+<main class="post">
+
+    <div class="post-info">
+        {{ if .IsTranslated }} {{ i18n "postAvailable" }} {{ range .Translations }}
+        <a href="{{ .Permalink }}"><span class="flag flag-icon flag-icon-{{ index $.Site.Data.langFlags (.Lang) }} flag-icon-squared"></span></a> {{ end}} {{ end }}
+        </p>
+    </div>
+
+    <article>
+        <h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h2>
+
+        {{- if .Params.toc }}
+        <hr />
+        <aside id="toc">
+            <div class="toc-title">{{ i18n "tableOfContents" }}</div>
+            {{ .TableOfContents }}
+        </aside>
+        <hr /> {{- end }} {{ with .Params.Cover }}
+        <img src="/img/{{ . }}" class="post-cover" /> {{ end }}
+
+        <div class="post-content">
+            {{ .Content }}
+        </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+        <ul style="list-style-type: none;">
+            {{ range (.GetTerms "categories") }}
+            <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+            {{ end }}
+        </ul>
+        </div>
+
+    {{ if .Params.comments }}
+    <div id="comments" class="thin">
+        {{- partial "comments.html" . -}}
+    </div>
+    {{ end }}
+</main>
+{{ end }}

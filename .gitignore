@@ -1,0 +1,6 @@
+airtable-fetch/images/*
+airtable-fetch/profiles/*
+mcj/content/*
+mcj/public/*
+mcj/static/img/*
+.mypy_cache/*
